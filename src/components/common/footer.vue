@@ -7,10 +7,6 @@
             <img src="https://s2.ax1x.com/2019/01/29/kQlPgg.png" alt />
             <span>我的微信</span>
           </li>
-          <li>
-            <img src="https://s2.ax1x.com/2019/01/29/kQlPgg.png" alt />
-            <span>我的微信</span>
-          </li>
         </ul>
       </div>
       <div class="personalStatement">
@@ -65,10 +61,10 @@ footer {
   .footBox {
     max-width: 1200px;
     margin: auto;
-    padding: 10px 0;
+    padding: 16px 0 10px 0;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     .pesonalCard {
       ul {
         width: 100%;
@@ -92,6 +88,7 @@ footer {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      margin-left: 24px;
       p {
         color: #73777a;
         b {

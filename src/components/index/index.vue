@@ -29,16 +29,16 @@
         </div>
       </div>
       <!-- 第二部分 -->
-      <!-- <div class="section-two">
-        文章列表展示
+      <div class="section-two">
+        <!-- 文章列表展示 -->
         <div class="artic">
           <articles></articles>
         </div>
-        侧边菜单栏
+        <!-- 侧边菜单栏 -->
         <div class="menu-right">
           <menu-right></menu-right>
         </div>
-      </div> -->
+      </div>
       <a href="#top" class="topBar hideToShow" v-if="isShow">
         <img src="/static/images/zd.png" alt />
       </a>
@@ -93,23 +93,13 @@ export default {
     snow.snows();
     this.show = true;
     window.addEventListener("scroll", this.handleScroll);
-    this.$http
-      .get("/api/admin/categories")
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
   },
   destroyed() {
-    console.log("2222");
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     // 监听页面滚动
     handleScroll() {
-      console.log("1111");
       let scrollTop =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
@@ -170,6 +160,7 @@ export default {
       }
       .menu-right {
         width: 25%;
+        margin-top: 24px;
       }
     }
     .topBar {

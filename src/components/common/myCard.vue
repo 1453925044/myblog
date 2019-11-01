@@ -3,13 +3,16 @@
     <h3>魏超个人名片</h3>
     <div class="introduce">
       <p class="text" v-for="(item,index) in introduce" :key="index">
-        <span>{{item.text}}</span>
+        <span>{{item.title}}</span>
       </p>
     </div>
     <div class="icon-list">
-      <p class="icon-box" v-for="(icon,index) in iconList" :key="index">
-        <img :src="icon" alt="图标" />
-      </p>
+      <div class="menu" v-for="(icon,index) in icons" :key="index" @click="jump(icon.path)">
+        <img class="menu-icon" :src="icon.img" alt="图标" />
+      </div>
+      <div class="wx-img">
+        <img src="https://s2.ax1x.com/2019/01/29/kQlPgg.png" />
+      </div>
     </div>
   </div>
 </template>
@@ -19,25 +22,47 @@ export default {
     return {
       introduce: [
         {
-          text: "职业：程序员，Web前端开发工程师"
+          title: "职业：程序员，Web前端开发工程师"
         },
         {
-          text: "现居：四川省成都市高新区"
+          title: "现居：四川省成都市高新区"
         },
         {
-          text: "公司：成都传晟信息技术有限公司（在职）"
+          title: "公司：成都传晟信息技术有限公司（在职）"
         },
         {
-          text: "Email：1453925044@qq.com"
+          title: "Email：1453925044@qq.com"
         }
       ],
-      iconList: [
-        "/static/images/zy.png",
-        "/static/images/yx.png",
-        "/static/images/QQ.png",
-        "/static/images/wx.png"
+      icons: [
+        {
+          img: "/static/images/zy.png",
+          path: "https://github.com/1453925044",
+          prefix: 0
+        },
+        {
+          img: "/static/images/yx.png",
+          path:
+            "http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=IhMWFxEbEBcSFhZiU1MMQU1P",
+          prefix: 1
+        },
+        {
+          img: "/static/images/QQ.png",
+          path: "http://wpa.qq.com/msgrd?v=3&uin=1453925044&site=qq&menu=yes",
+          prefix: 2
+        },
+        {
+          img: "/static/images/wx.png",
+          path: "",
+          prefix: 3
+        }
       ]
     };
+  },
+  methods: {
+    jump(args) {
+      window.open(args);
+    }
   }
 };
 </script>
@@ -63,10 +88,11 @@ export default {
     }
   }
   .icon-list {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .icon-box {
+    .menu {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -77,9 +103,23 @@ export default {
       box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1),
         inset 0px 1px 1px rgba(0, 0, 0, 0.7);
       margin: 0 5px;
-      img {
+      cursor: pointer;
+      .menu-icon {
         width: 32px;
         height: 32px;
+      }
+    }
+    .menu:nth-child(4):hover + .wx-img {
+      display: block;
+    }
+    .wx-img {
+      position: absolute;
+      bottom: 60px;
+      right: 0px;
+      display: none;
+      img {
+        width: 92px;
+        height: 92px;
       }
     }
   }

@@ -30,37 +30,6 @@
 <script>
 import module from "@/components/common/module";
 import $ from "jquery";
-// 自定义彩色标签
-$(function() {
-  // 自定义彩色标签
-  let tag = $(".btn");
-  function selectFrom() {
-    return Math.floor(Math.random() * 16777215).toString(16);
-  }
-  for (var i = 0; i < tag.length; i++) {
-    var color = selectFrom();
-    $(tag[i]).css({
-      color: "#" + color,
-      background: "#fafafa",
-      "font-family": "pingfang"
-    });
-    $(tag[i])
-      .mouseenter(function() {
-        var target = $(this).css("color");
-        $(this).css({
-          background: target,
-          color: "#ffffff"
-        });
-      })
-      .mouseleave(function() {
-        var target = $(this).css("background-color");
-        $(this).css({
-          background: "#fafafa",
-          color: target
-        });
-      });
-  }
-});
 export default {
   components: {
     module
@@ -95,6 +64,39 @@ export default {
         "微信小程序"
       ]
     };
+  },
+  mounted() {
+    // 自定义彩色标签
+    $(function() {
+      // 自定义彩色标签
+      let tag = $(".btn");
+      function selectFrom() {
+        return Math.floor(Math.random() * 16777215).toString(16);
+      }
+      for (var i = 0; i < tag.length; i++) {
+        var color = selectFrom();
+        $(tag[i]).css({
+          color: "#" + color,
+          background: "#fafafa",
+          "font-family": "pingfang"
+        });
+        $(tag[i])
+          .mouseenter(function() {
+            var target = $(this).css("color");
+            $(this).css({
+              background: target,
+              color: "#ffffff"
+            });
+          })
+          .mouseleave(function() {
+            var target = $(this).css("background-color");
+            $(this).css({
+              background: "#fafafa",
+              color: target
+            });
+          });
+      }
+    });
   }
 };
 </script>

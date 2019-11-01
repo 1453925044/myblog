@@ -28,7 +28,6 @@
 
   .moudle {
       width: 100%;
-      margin-top: 24px;
   }
 
   .moudle .box {
@@ -94,6 +93,7 @@
       transition: color .3s;
       text-transform: capitalize;
       border: 1px solid #f0f0f0;
+      cursor: pointer;
   }
 
   /* 伪类动态颜色渐变动画(头部) */

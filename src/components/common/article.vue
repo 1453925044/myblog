@@ -1,5 +1,15 @@
 <template>
   <div class="box">
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb" v-if="$route.name =='myBlogs'">
+      <p class="dicator">博客日记</p>
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">博客日记</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">程序人生</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">设计心得</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">人生规划</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <article>
       <ul class="list">
         <li class="cell" v-for="(item,index) in article" :key="index">
@@ -80,27 +90,27 @@ export default {
 <style lang="less" scoped>
 .box {
   width: 100%;
-  background: #f8f8f8;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background: #fff;
   article {
     width: 100%;
+    margin-top: 24px;
     .list {
       width: 100%;
       display: block;
       .cell {
         width: 100%;
-        margin-top: 24px;
-        background: #ffffff;
-        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
         .head-box {
           width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 16px;
-          box-sizing: border-box;
+          padding: 10px 0;
           .cell-left {
             width: 240px;
-            height: 145px;
+            height: 125px;
             margin-right: 24px;
             img {
               width: 100%;
@@ -109,7 +119,7 @@ export default {
           }
           .content {
             width: 900px;
-            height: 145px;
+            height: 125px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -140,7 +150,8 @@ export default {
           width: 100%;
           padding: 12px 16px;
           box-sizing: border-box;
-          border-top: 1px solid #d8d8d8;
+          border-top: 1px dashed #d3d3d3;
+          border-bottom: 1px dashed #d3d3d3;
           display: flex;
           justify-content: space-between;
           .foot-left {
@@ -166,5 +177,31 @@ export default {
 .foot-right:hover {
   cursor: pointer;
   color: #51aded;
+}
+</style>
+<style lang="less">
+.breadcrumb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #d8d8d8;
+  background: #ffffff;
+  .dicator {
+    color: #409eff;
+    font-size: 15px;
+    border-bottom: 3px solid #409eff;
+    padding: 12px 0;
+    font-weight: 700;
+  }
+  .el-breadcrumb {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 0;
+    .el-breadcrumb__inner,
+    .is-link {
+      font-size: 15px;
+    }
+  }
 }
 </style>

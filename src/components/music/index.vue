@@ -55,9 +55,6 @@ export default {
         .then(res => {
           if (res.data) {
             let data = res.data.result;
-            data.forEach((item, index) => {
-              //   this.transform(item.playCount, 3);
-            });
             this.$set(this, "list", data);
           }
         })
