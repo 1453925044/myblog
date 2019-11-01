@@ -1,0 +1,200 @@
+  /* 个人字体图标库 */
+
+  @font-face {
+      font-family: 'icon';
+      src: url('//at.alicdn.com/t/font_1468352_upwf8gnfijs.eot');
+      src: url('//at.alicdn.com/t/font_1468352_upwf8gnfijs.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1468352_upwf8gnfijs.woff2') format('woff2'), url('//at.alicdn.com/t/font_1468352_upwf8gnfijs.woff') format('woff'), url('//at.alicdn.com/t/font_1468352_upwf8gnfijs.ttf') format('truetype'), url('//at.alicdn.com/t/font_1468352_upwf8gnfijs.svg#iconfont') format('svg');
+  }
+
+  @font-face {
+      font-family: pingfang;
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+      src: url('https://www.chinabdc.cn:8092/H5/font/PingFang-SC-Bold.ttf') format('truetype');
+  }
+
+  /* 边框4px圆角 */
+
+  .radiu4px {
+      border-radius: 4px;
+  }
+
+  /* 侧边模块公用样式 */
+
+  .sidebar {
+      width: 25%;
+  }
+
+  .moudle {
+      width: 100%;
+      margin-top: 24px;
+  }
+
+  .moudle .box {
+      width: 100%;
+      padding: 0 16px;
+      box-sizing: border-box;
+      background: #ffffff;
+      border-radius: 3px;
+      margin-bottom: 24px;
+  }
+
+  .moudle-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .moudle-list .cell {
+      width: 100%;
+      padding: 6px 0;
+      margin: 6px 0;
+      background: #f6f6f6;
+      border-radius: 3px;
+  }
+
+  .moudle-list .cell>p {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 6px;
+  }
+
+  .moudle-list .cell p>i {
+      color: #ff0000;
+      line-height: 20px;
+      font-size: 14px;
+      font-family: icon, pingfang;
+      margin-right: 16px;
+  }
+
+  .moudle-list .cell p>span {
+      width: 85%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+
+  .btn-tag .btn {
+      display: inline-block;
+      width: 32%;
+      background: #f6f6f6;
+      box-sizing: border-box;
+      margin: 6px 3.5px 6px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 5px 5px;
+      text-align: center;
+      font-size: 14px;
+      font-family: pingfang;
+      border-radius: 4px;
+      transition: color .3s;
+      text-transform: capitalize;
+      border: 1px solid #f0f0f0;
+  }
+
+  /* 伪类动态颜色渐变动画(头部) */
+
+  header::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      top: 0;
+      left: 0;
+      background: linear-gradient( -45deg, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+      background-size: 200% 200%;
+      animation: gradient 4.5s ease infinite;
+  }
+
+  @keyframes gradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+
+  /* 文字颜色动态渐变动画 */
+
+  .logo a {
+      background-image: -webkit-linear-gradient(left, #147B96, #E6D205 25%, #147B96 50%, #E6D205 75%, #147B96);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-background-size: 200% 100%;
+      -webkit-animation: masked-animation 4s infinite linear;
+  }
+
+  @keyframes masked-animation {
+      0% {
+          background-position: 0 0;
+      }
+      100% {
+          background-position: -100% 0;
+      }
+  }
+
+  /*谷歌、safari、qq浏览器、360浏览器滚动条样式*/
+
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+  ::-webkit-scrollbar {
+      /* 自定义宽度 */
+      width: 5px;
+      height: 110px;
+      background-color: #F5F5F5;
+  }
+
+  /*定义滚动条轨道 内阴影+圆角*/
+
+  ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: #F5F5F5;
+  }
+
+  /*定义滑块 内阴影+圆角*/
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+      background-color: #bdbdbd;
+  }
+
+  /*滑块效果*/
+
+  ::-webkit-scrollbar-thumb:hover {
+      border-radius: 5px;
+      -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.4);
+  }
+
+  /* 显示过渡效果 */
+
+  .hideToShow {
+      animation: hideToShow 0.8s ease-in-out;
+  }
+
+  .icon {
+      font-family: icon;
+  }
+
+  @keyframes hideToShow {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  .is-active {
+      color: #409eff !important;
+  }
