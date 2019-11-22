@@ -38,6 +38,14 @@ const router = new Router({
       }
     },
     {
+      path: "/blogs/detail",
+      name: 'detail',
+      component: resolve => require(['@/components/blogs/detail'], resolve),
+      meta: {
+        title: "文章详情"
+      }
+    },
+    {
       path: "/music/index",
       name: 'music',
       component: resolve => require(['@/components/music/index'], resolve),

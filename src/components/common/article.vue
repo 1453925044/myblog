@@ -12,7 +12,7 @@
     </div>
     <article>
       <ul class="list">
-        <li class="cell" v-for="(item,index) in article" :key="index">
+        <li class="cell" v-for="(item,index) in article" :key="index" @click="jump(index)">
           <div class="head-box">
             <div class="cell-left">
               <img
@@ -84,7 +84,14 @@ export default {
       ]
     };
   },
-  methods: {}
+  methods: {
+    jump() {
+      this.$router.push({
+        path: "/blogs/detail",
+        qurey: {}
+      });
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -128,6 +135,9 @@ export default {
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
+            }
+            h2:hover {
+              color: #409eff;
             }
             .tags {
               width: 100%;

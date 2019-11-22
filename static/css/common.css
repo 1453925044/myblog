@@ -27,7 +27,23 @@
   }
 
   .moudle {
+      position: relative;
       width: 100%;
+  }
+
+  .moudle::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      height: 0;
+      width: 0;
+      display: block;
+      border: 16px transparent solid;
+      border-bottom-width: 0;
+      border-left-width: 0;
+      border-top-color: #dc0e2a;
+      z-index: 10;
   }
 
   .moudle .box {
@@ -196,5 +212,5 @@
   }
 
   .is-active {
-      color: #409eff !important;
+      color: #45b6f7 !important;
   }

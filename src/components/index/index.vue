@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <banner />
+    <banner></banner>
     <div class="container">
       <a href="#top"></a>
       <!-- 第一部分 -->

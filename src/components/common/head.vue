@@ -1,8 +1,15 @@
+import index from 'vuex';
 <template>
   <header id="header">
     <nav class="nav-menu">
       <ul class="list">
-        <li class="menu-cell" v-for="(item, index) in navList" :key="index" @click="change(item)">
+        <li
+          class="menu-cell"
+          :class="{'active' :isSelect==index}"
+          v-for="(item, index) in navList"
+          :key="index"
+          @click="change(item,index)"
+        >
           <router-link class="path" :to="item.path">
             <i class="fa" :class="item.icon">&nbsp; {{ item.title }}</i>
           </router-link>
@@ -16,6 +23,7 @@
 export default {
   data() {
     return {
+      isSelect: 0,
       path: "",
       navList: [
         {
@@ -58,8 +66,8 @@ export default {
     };
   },
   methods: {
-    change(e) {
-      this.isSelect = e.name;
+    change(e, index) {
+      this.isSelect = index;
     }
   }
 };
@@ -93,28 +101,44 @@ export default {
   padding: 0;
   left: 0;
   z-index: 999;
-  background: rgba(40, 42, 44, 0.6);
+  background: #343c47;
   .nav-menu {
     width: 1200px;
     margin: auto;
     .list {
       display: flex;
       width: 100%;
-      padding: 15px 0;
+      .active {
+        position: relative;
+        transition: all 0.03s ease-out 0s;
+      }
+      .active::after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        background-color: #45b6f7;
+        transition: all 0.6s;
+        z-index: -1;
+        transition: all 0.03s ease-out 0s;
+      }
       .menu-cell {
-        float: left;
-        margin-right: 36px;
         .path {
+          display: block;
+          height: 66px;
+          padding: 0 13px;
+          line-height: 66px;
           color: #ffffff;
           font-weight: bold;
           font-size: 15px;
-          display: block;
         }
         .path:hover {
           color: #409eff;
         }
         .is-active {
-          color: #409eff;
+          color: #45b6f7;
         }
       }
     }
