@@ -19,7 +19,7 @@
     </div>
     <!-- 侧边菜单栏 -->
     <div class="menu-right">
-        <menu-right></menu-right>
+        <menu-right></menu-right> 
     </div>
 
 </div>
