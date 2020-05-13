@@ -1,25 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { MessageBox } from "element-ui";
-
 Vue.use(Router)
 
 const router = new Router({
-  linkActiveClass: 'is-active',
+  // mode: 'history',
   routes: [
     {
       path: '/',
-      redirect() {
-        return '/index'
-      },
+      redirect: '/index'
     },
-    {
+    { 
       path: '/index',
       name: 'index',
-      component: resolve => require(['@/components/index/index'], resolve),
-      meta: {
-        isLogin: true
-      }
+      component: resolve => require(['@/template/index/index'], resolve)
     },
     {
       path: "/about/index",
@@ -32,7 +25,7 @@ const router = new Router({
     {
       path: "/blogs/list",
       name: 'myBlogs',
-      component: resolve => require(['@/components/blogs/list'], resolve),
+      component: resolve => require(['@/template/blogs/list'], resolve),
       meta: {
         title: "文章列表"
       }
@@ -40,7 +33,7 @@ const router = new Router({
     {
       path: "/blogs/detail",
       name: 'detail',
-      component: resolve => require(['@/components/blogs/detail'], resolve),
+      component: resolve => require(['@/template/blogs/detail'], resolve),
       meta: {
         title: "文章详情"
       }
@@ -96,10 +89,15 @@ const router = new Router({
 //   }
 // })
 
+// 跳转路由回到窗口起始位置
 router.afterEach((to, from, next) => {
   window.scrollTo(0, 0);
 })
-
+// 解决路由老版本的错误
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+return routerPush.call(this, location).catch(error=> error)
+}
 export default router;
 
 

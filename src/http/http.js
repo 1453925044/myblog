@@ -3,10 +3,14 @@ import Qs from 'qs'
 import router from '@/router/index'
 import { Loading } from 'element-ui';
 
-//接口基路径
-axios.defaults.baseURL = 'http://www.weichaooqx.com:3000/';
 // 请求超时时间
 axios.defaults.timeout = 60000;
+//接口基路径
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/api' : 'https://weichaooqx.com';
+
+// 允许所有跨域来源
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8'
 //参数格式化
 axios.defaults.transformRequest = [function (data) {
     data = Qs.stringify(data, { indices: false });
@@ -59,7 +63,6 @@ axios.interceptors.request.use(
 // 响应拦截器
 axios.interceptors.response.use(
     response => {
-        console.log(response)
         if (response.status === 200) {
             tryHideFullScreenLoading()
             return Promise.resolve(response);

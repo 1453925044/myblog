@@ -1,4 +1,4 @@
-import { get, post } from '@/http/http.js'
+import { get, post } from '@/http/http.js' 
 
 // 音乐banner封面
 const musicBanner = (info) => get('/banner', info)
@@ -10,11 +10,14 @@ const playDetail = (info) => get('/playlist/detail', info)
 const playSongList = (info) => get('/song/detail', info)
 // 获取音乐详情
 const songDetail = (info) => get('/song/url', info)
+// 获取歌词
+const songLrc = (info) => get('/lyric', info)
 
 export {
     playList,
     musicBanner,
     playDetail,
     playSongList,
-    songDetail
+    songDetail,
+    songLrc
 }

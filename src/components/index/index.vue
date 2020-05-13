@@ -43,16 +43,14 @@
         <img src="/static/images/zd.png" alt />
       </a>
     </div>
-    <rightSide />
   </div>
 </template>
 
 <script>
 import banner from "@/components/common/banner";
 import myCard from "@/components/common/myCard";
-import menuRight from "@/components/common/menu-right";
+import menuRight from "@/components/common/menu-right"; 
 import articles from "@/components/common/article";
-import rightSide from "@/components/common/rightSide";
 import snow from "../../../static/js/snow.js";
 import $ from "jquery";
 export default {
@@ -62,7 +60,6 @@ export default {
     myCard,
     articles,
     menuRight,
-    rightSide
   },
   data() {
     return {

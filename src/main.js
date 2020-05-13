@@ -11,7 +11,11 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
 Vue.prototype.$unit = handleTemp
-// 配置axios拦截器
+
+import headers from './components/common/head';
+Vue.component('headers',headers)
+
+// 引入富文本编辑器
 
 
 new Vue({
