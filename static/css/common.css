@@ -18,6 +18,10 @@
       src: url('https://www.chinabdc.cn:8092/H5/font/PingFang-SC-Bold.ttf') format('truetype');
   }
 
+  .icon {
+      font-family: icon;
+  }
+
   /* 边框4px圆角 */
 
   .radiu4px {
@@ -165,7 +169,6 @@
   }
 
   /*谷歌、safari、qq浏览器、360浏览器滚动条样式*/
-
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 
   ::-webkit-scrollbar {
@@ -203,10 +206,6 @@
 
   .hideToShow {
       animation: hideToShow 0.8s ease-in-out;
-  }
-
-  .icon {
-      font-family: icon;
   }
 
   @keyframes hideToShow {

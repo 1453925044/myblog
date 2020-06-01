@@ -1,20 +1,32 @@
-import axios from 'axios'
 import Qs from 'qs'
-import router from '@/router/index'
+import axios from 'axios'
 import { Loading } from 'element-ui';
 
 // 请求超时时间
 axios.defaults.timeout = 60000;
 //接口基路径
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/api' : 'https://weichaooqx.com';
-
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/api' : 'http://www.weichaooqx.com:3000';
 // 允许所有跨域来源
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8'
 //参数格式化
-axios.defaults.transformRequest = [function (data) {
-    data = Qs.stringify(data, { indices: false });
-    return data;
+axios.defaults.transformRequest = [function (data, config) {
+    if (!config['Content-Type']) return Qs.stringify(data);
+    switch (config['Content-Type'].toLowerCase()) {
+        case 'application/json;charset=utf-8':
+            {
+                return JSON.stringify(data)
+            }
+        // 上传类型请求,返回原生对象
+        case 'multipart/form-data;charset=utf-8':
+            {
+                return data
+            }
+        default:
+            {
+                return Qs.stringify(data);
+            }
+    };
 }];
 // 设置请求加载loading
 let loading;
@@ -49,10 +61,6 @@ export function tryHideFullScreenLoading() {
 // 请求拦截器
 axios.interceptors.request.use(
     config => {
-        // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
-        // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
-        // const token = store.getters.token;
-        // config.headers.Authorization = token
         showFullScreenLoading();
         return config;
     },
@@ -117,7 +125,7 @@ axios.interceptors.response.use(
                     break;
                 // 其他错误，直接抛出错误提示    
                 default:
-                    _console.log(error.response.status)
+                    console.log(error.response.status)
                 // MessageBox.alert(error.response.data.Message, "提示", {
                 //     confirmButtonText: "确定"
                 // });
@@ -131,13 +139,13 @@ axios.interceptors.response.use(
  * @param {String} url [请求的url地址] 
  * @param {Object} params [请求时携带的参数] 
  */
-export function get(url, params) {
+const httpGet = (url, params) => {
     return new Promise((resolve, reject) => {
         axios.get(url, {
             params: params
         })
             .then(res => {
-                resolve(res);
+                resolve(res.data);
             })
             .catch(err => {
                 reject(err)
@@ -149,10 +157,10 @@ export function get(url, params) {
  * @param {String} url [请求的url地址] 
  * @param {Object} params [请求时携带的参数] 
  */
-export function post(url, params) {
+const httpPost = (url, params) => {
     let config = {
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+            "Content-Type": "application/json;charset=UTF-8"
         }
     };
     return new Promise((resolve, reject) => {
@@ -165,4 +173,30 @@ export function post(url, params) {
             })
     });
 }
-export default axios;
+
+/**
+ * 文件上传
+ * @param {String} url [请求的url地址] 
+ * @param {Object} params [请求时携带的参数] 
+ */
+const upLoadFile = (url, params) => {
+    let config = {
+        headers: {
+            "Content-Type": "multipart/form-data;charset=UTF-8"
+        }
+    };
+    return new Promise((resolve, reject) => {
+        axios.post(url, params, config)
+            .then(res => {
+                resolve(res.data);
+            })
+            .catch(err => {
+                reject(err)
+            })
+    });
+}
+export {
+    httpGet,
+    httpPost,
+    upLoadFile
+}

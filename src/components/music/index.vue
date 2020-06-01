@@ -8,7 +8,7 @@
     </el-carousel>
     <!-- 歌单列表 -->
     <div class="list">
-        <music-list :music="list"></music-list>
+        <music-list ref="music"></music-list>
     </div>
 </div>
 </template>
@@ -26,12 +26,11 @@ export default {
     data() {
         return {
             banner: [],
-            list: []
         };
     },
     mounted() {
-        this.getMusicBanner();
         this.getMusicList();
+        this.getMusicBanner();
     },
     methods: {
         getMusicBanner() {
@@ -43,13 +42,8 @@ export default {
                     if (res.data) {
                         let data = res.data;
                         this.$set(this, "banner", data.banners);
-                    } else {
-                        console.log(res);
                     }
                 })
-                .catch(err => {
-                    console.log(err);
-                });
         },
         // 获取音乐歌单列表
         getMusicList() {
@@ -59,12 +53,11 @@ export default {
                 .then(res => {
                     if (res.data) {
                         let data = res.data.result;
-                        this.$set(this, "list", data);
+                        this.$nextTick(function () {
+                            this.$refs.music.handleCount(data);
+                        })
                     }
                 })
-                .catch(err => {
-                    console.log(err);
-                });
         }
     }
 };
@@ -88,11 +81,12 @@ img {
 }
 </style><style>
 .el-carousel__item h3 {
+    margin: 0;
+    opacity: 0.75;
     color: #475669;
     font-size: 14px;
-    opacity: 0.75;
     line-height: 200px;
-    margin: 0;
+
 }
 
 .el-carousel__item:nth-child(2n) {

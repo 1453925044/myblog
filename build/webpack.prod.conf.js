@@ -13,6 +13,14 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = require('../config/prod.env')
 
+//打包的时候输出可配置的文件
+var GenerateAssetPlugin = require('generate-asset-webpack-plugin');
+var createServerConfig = function (compilation) {
+  let cfgJson = { baseUrl: "https://weichaooqx.com" };
+  return JSON.stringify(cfgJson);
+}
+
+
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -27,7 +35,15 @@ const webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  // 插件列表
   plugins: [
+    new GenerateAssetPlugin({
+      filename: 'serverconfig.json', //生成的配置文件
+      fn: (compilation, cb) => {
+        cb(null, createServerConfig(compilation));
+      },
+      extraFiles: []
+    }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
@@ -81,7 +97,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks (module) {
+      minChunks(module) {
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&

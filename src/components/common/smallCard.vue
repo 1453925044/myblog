@@ -20,7 +20,7 @@
     <!-- 微信名片 -->
     <div class="wx" v-if="prefix == 2">
         <p class="title">魏先生</p>
-        <img class="img" src="https://s2.ax1x.com/2019/01/29/kQlPgg.png" alt />
+        <img class="img" src="/static/images/wx_card.png" alt="微信名片" />
         <span class="qrcode">微信扫码</span>
     </div>
     <!-- 打赏小卡片、欢迎打赏 -->
@@ -28,11 +28,11 @@
         <p class="title">原创不易，感谢您对作者的支持!</p>
         <ul>
             <li>
-                <img class="img" src="https://s2.ax1x.com/2019/01/29/kQMZss.png" alt />
+                <img class="img" src="/static/images/wx_ck.png" alt="微信收款码" />
                 <span class="qrcode">微信收款码</span>
             </li>
             <li>
-                <img class="img" src="https://s2.ax1x.com/2019/01/29/kQMnZq.png" alt />
+                <img class="img" src="/static/images/zfb_ck.png" alt="支付宝收款码" />
                 <span class="qrcode">支付宝收款码</span>
             </li>
         </ul>

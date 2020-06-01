@@ -7,12 +7,17 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/index'
+      redirect: '/test'
     },
     { 
       path: '/index',
       name: 'index',
       component: resolve => require(['@/template/index/index'], resolve)
+    },
+    { 
+      path: '/test',
+      name: 'test',
+      component: resolve => require(['@/template/test'], resolve)
     },
     {
       path: "/about/index",
@@ -20,6 +25,14 @@ const router = new Router({
       component: resolve => require(['@/components/about/index'], resolve),
       meta: {
         title: "关于我"
+      }
+    },
+    {
+      path: "/blogs/create",
+      name: 'create',
+      component: resolve => require(['@/template/blogs/create'], resolve),
+      meta: {
+        title: "文章发布"
       }
     },
     {

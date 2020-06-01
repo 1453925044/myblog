@@ -4,7 +4,7 @@
         <div class="pesonalCard">
             <ul>
                 <li>
-                    <img src="https://s2.ax1x.com/2019/01/29/kQlPgg.png" alt />
+                    <img class="img" src="/static/images/wx_card.png" alt="微信名片" />
                     <span>我的微信</span>
                 </li>
             </ul>
@@ -13,11 +13,11 @@
             <p>
                 <b>站点声明</b>
             </p>
-            <p>本站个人博客网站，均为魏超本人设计，个人可以使用，但是未经许可不得用于任何商业目的。</p>
-            <p>所有文章、个人博客未经授权禁止转载、摘编、复制或建立镜像，如有违反，追究法律责任。举报邮箱：1453925044@qq.com</p>
+            <p>{{webInfo.text_one || '本个人博客网站，均为魏超本人设计，未经博主许可不得用于任何商业目的。'}}</p>
+            <p>{{webInfo.text_two || '所有文章、个人博客未经授权禁止转载、摘编、复制或建立镜像，如有违反，追究法律责任。举报邮箱：1453925044@qq.com'}}</p>
             <p>
-                © 2019 魏超个人博客 All Rights Reserved.
-                <span @click="jump()">备案号:蜀ICP备18020325号</span>
+                {{webInfo.copyright || '© 2018 魏超个人博客 All Rights Reserved.'}}
+                <span @click="jump()">{{webInfo.record || '备案号:蜀ICP备18020325号'}}</span>
             </p>
         </div>
     </div>
@@ -25,11 +25,29 @@
 </template>
 
 <script>
+import {
+    website
+} from '@/api/website/website';
 export default {
     data() {
-        return {};
+        return {
+            webInfo: {}
+        };
+    },
+    mounted() {
+        this.webSiteInfo();
     },
     methods: {
+        // 获取站点描述信息
+        webSiteInfo() {
+            website().then(res => {
+                if (res.success) {
+                    this.webInfo = res.data;
+                    return
+                }
+            })
+        },
+        // 跳转备案查询网站
         jump() {
             window.open("http://www.beian.miit.gov.cn");
         }
@@ -106,7 +124,8 @@ footer {
     }
 }
 
-span {
+span:hover {
+    color: #00C1DE;
     cursor: pointer;
 }
 </style>

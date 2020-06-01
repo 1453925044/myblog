@@ -101,7 +101,7 @@ export default {
     left: 0;
     padding: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 999999;
     position: fixed;
     background-color: #343c47;
 

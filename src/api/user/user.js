@@ -1,6 +1,6 @@
-import { get, post } from '@/http/http.js'
+import { httpGet, httpPost } from '@/http/http.js' 
 
-const isLogin = (info) => post('/login', info)
+const isLogin = (info) => httpPost('/login', info)
 
 export {
     isLogin

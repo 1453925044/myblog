@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^3.2.1",
     "aplayer": "^1.10.1",
     "axios": "^0.19.0",
     "element-ui": "^2.12.0",
@@ -18,6 +19,7 @@
     "qs": "^6.9.0",
     "sass-loader": "^8.0.0",
     "save": "^2.4.0",
+    "tinymce": "^5.2.2",
     "vue": "^2.5.2",
     "vue-let-it-snow": "^1.0.0",
     "vue-router": "^3.0.1",
@@ -49,6 +51,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "generate-asset-webpack-plugin": "^0.3.0",
     "html-webpack-plugin": "^2.30.1",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",

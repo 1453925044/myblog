@@ -1,8 +1,10 @@
 <template>
 <div id="app">
-    <headers></headers>
+    <headers v-if="$route.name !='create'"></headers>
     <router-view />
-    <footers v-if="$route.name !='about'&& $route.name !='login'"></footers>
+    <keep-alive>
+        <footers></footers>
+    </keep-alive>
 </div>
 </template>
 
@@ -12,7 +14,7 @@ export default {
     name: "App",
     components: {
         footers
-    },
+    }
 };
 </script>
 
