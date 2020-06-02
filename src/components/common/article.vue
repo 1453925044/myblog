@@ -15,14 +15,14 @@
             <li class="cell hideToShow" v-for="(item,index) in article" :key="index">
                 <div class="head-box">
                     <div class="cell-left">
-                        <img class="cover" src="/static/images/b3.jpeg" alt="文章封面" />
+                        <img class="cover" :src="item.cover || '/static/images/b3.jpeg'" alt="文章封面" />
                     </div>
                     <div class="content">
-                        <h2 @click="jump(index)">使用win10自带的虚拟机搭建胸痛</h2>
+                        <h2 @click="jump(item.id)">{{item.title || '暂无数据'}}</h2>
                         <p class="tags">
-                            <i v-for="(tag,value) in item.tag" :key="value">{{tag}}</i>
+                            <i v-for="(tag,value) in item.tags" :key="value">{{tag}}</i>
                         </p>
-                        <div class="text">asdasdasdasdasd</div>
+                        <div class="text" v-html="item.content"></div>
                     </div>
                 </div>
                 <div class="foot-box">
@@ -30,23 +30,23 @@
                         <ul class="foot-list">
                             <li class="foot-cell">
                                 <i class="fa fa-calendar"></i>
-                                <span>2019年2月13日</span>
+                                <span>{{item.createTime}}</span>
                             </li>
                             <li class="foot-cell">
                                 <i class="fa fa-commenting-o"></i>
-                                <span>4条评论</span>
+                                <span>{{item.review || 0}}条评论</span>
                             </li>
                             <li class="foot-cell">
                                 <i class="fa fa-eye"></i>
-                                <span>143次浏览</span>
+                                <span>{{item.views || 0}}次浏览</span>
                             </li>
                             <li class="foot-cell">
                                 <i class="fa fa-thumbs-o-up"></i>
-                                <span>2人点赞</span>
+                                <span>{{item.praise || 0}}人点赞</span>
                             </li>
                             <li class="foot-cell">
                                 <i class="fa fa-user"></i>
-                                <span>w_o</span>
+                                <span>{{item.author}}</span>
                             </li>
                         </ul>
                     </div>
@@ -62,30 +62,50 @@
 </template>
 
 <script>
+import {
+    getBlogList
+} from "@/api/blog/index.js";
 export default {
     data() {
         return {
-            pageFiles: [],
-            article: [{
-                    tag: ["1", "2", "3", "4"]
-                },
-                {
-                    tag: ["1", "2", "3", "4"]
-                },
-                {
-                    tag: ["1", "2", "3", "4"]
-                },
-                {
-                    tag: ["1", "2", "3", "4"]
-                }
-            ]
+            article: [],
+            pageFiles: []
         };
     },
+    mounted() {
+        this.getList();
+    },
     methods: {
-        jump() {
+        getList() {
+            getBlogList({
+                author: "魏超",
+                keyword: ""
+            }).then(res => {
+                if (res.success && res.data) {
+                    let data = res.data;
+                    // 列表去富文本格式
+                    data.forEach(item => {
+                        item.content = item.content.replace(/(\n)/g, "");
+                        item.content = item.content.replace(/(\t)/g, "");
+                        item.content = item.content.replace(/(\r)/g, "");
+                        item.content = item.content.replace(/<\/?[^>]*>/g, "");
+                        if (item.tags) {
+                            item.tags = item.tags.split(",");
+                        }
+                    });
+
+                    this.article = data;
+                    console.log(this.article)
+                    return;
+                }
+            });
+        },
+        jump(id) {
             this.$router.push({
                 path: "/blogs/detail",
-                qurey: {}
+                query: {
+                    id: id
+                }
             });
         }
     }
@@ -110,6 +130,7 @@ export default {
 
             .cell {
                 width: 100%;
+                cursor: pointer;
                 margin-bottom: 24px;
 
                 .head-box {
@@ -129,12 +150,12 @@ export default {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
-                            transition: all linear .4s;
+                            transition: all linear 0.4s;
                         }
 
                         img:hover {
                             transform: scale(1.1);
-                            transition: all linear .4s;
+                            transition: all linear 0.4s;
                         }
                     }
 
@@ -142,6 +163,7 @@ export default {
                         flex: 1;
                         height: 125px;
                         display: flex;
+                        overflow: hidden;
                         flex-direction: column;
                         justify-content: space-around;
 
@@ -155,18 +177,26 @@ export default {
                         .tags {
                             width: 100%;
                             display: flex;
+                            overflow: hidden;
 
                             i {
-                                width: 40px;
+                                color: #333;
+                                font-size: 13px;
+                                margin-right: 6px;
+                                padding: 4px 8px;
+                                background: #f2f2f2;
+                                border-radius: 4px;
+                                box-sizing: border-box;
                             }
                         }
 
                         .text {
                             width: 100%;
                             color: #666666;
+                            font-size: 15px;
                             overflow: hidden;
                             display: -webkit-box;
-                            -webkit-line-clamp: 3;
+                            -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
                         }
                     }

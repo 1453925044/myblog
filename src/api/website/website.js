@@ -1,6 +1,6 @@
 import { httpGet } from '@/http/http.js'
 
-const website = (info) => httpGet('/websit/info', info)
+const website = (info) => httpGet('/website/footer', info)
 
 
 export {

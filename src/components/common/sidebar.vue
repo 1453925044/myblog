@@ -52,34 +52,34 @@ export default {
 
 <style lang="less" scoped>
 .toolBar {
-    position: fixed;
-    right: 0;
     top: 0;
-    z-index: 999;
-    background: #333;
+    right: 0;
     width: 40px;
+    z-index: 9999;
+    position: fixed;
     min-height: 100%;
-    transition: all 0.4s;
+    background: #343c47;
     animation: toolBar;
+    transition: all 0.4s;
 
     .close {
-        position: absolute;
+        top: 70px;
         width: 40px;
         height: 40px;
-        top: 0;
-        text-align: center;
+        z-index: 9999999999;
         line-height: 40px;
+        position: absolute;
+        text-align: center;
 
         i {
+            color: #ffffff;
             cursor: pointer;
             font-weight: bold;
             font-family: icon;
-            color: #ffffff;
         }
     }
 
     .icon-nav {
-        position: absolute;
         top: 0;
         bottom: 0;
         right: 0;
@@ -88,22 +88,24 @@ export default {
         height: 180px;
         margin: auto;
         display: flex;
+        position: absolute;
         flex-direction: column;
         justify-content: space-between;
 
         .icon {
-            position: relative;
+
             width: 100%;
             height: 40px;
             display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
+            align-items: center;
+            position: relative;
+            justify-content: center;
 
             .box {
-                position: absolute;
                 top: 0;
                 right: 40px;
+                position: absolute;
             }
 
             img {

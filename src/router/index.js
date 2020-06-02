@@ -7,7 +7,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/test'
+      redirect: '/blogs/create'
     },
     { 
       path: '/index',

@@ -32,8 +32,8 @@
 
 <script>
 import {
-    getList,
-    updateBlog
+    updateBlog,
+    getBlogList,
 } from '@/api/blog/index.js'
 import editor from '@/components/editor/editor'
 import articles from "@/components/common/article";

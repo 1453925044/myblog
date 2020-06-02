@@ -20,21 +20,21 @@
         <div class="head-cell">
             <span>标签</span>
             <el-select @change="selectChange" v-model="tag" multiple collapse-tags style="width:100%" placeholder="请选择分类标签">
-                <el-option v-for="item in tags" :key="item.id" :label="item.name" :value="item.name">
-                </el-option>
+                <el-option v-for="item in tags" :key="item.id" :label="item.name" :value="item.name"></el-option>
             </el-select>
         </div>
-
     </div>
     <div class="upload">
-        <span>图片上传</span>
+        <span>文章封面</span>
         <el-upload class="upload-demo" drag action="/api/upload" list-type="picture" multiple :on-success="upload">
             <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div class="el-upload__text">
+                将文件拖到此处，或
+                <em>点击上传</em>
+            </div>
         </el-upload>
     </div>
-    <img :src="src">
+    <!-- <img :src="src"> -->
     <div class="edit">
         <span>内容编辑</span>
         <editor @updata="updata"></editor>
@@ -45,11 +45,11 @@
 <script>
 import {
     addblog,
-    getList,
+    getBlogList,
     blogTags,
     updateBlog
-} from '@/api/blog/index.js'
-import editor from '@/components/editor/editor'
+} from "@/api/blog/index.js";
+import editor from "@/components/editor/editor";
 import module from "@/components/common/module";
 export default {
     components: {
@@ -58,21 +58,21 @@ export default {
     },
     data() {
         return {
-            src:'',
-            tag: '',
-            title: '',
-            articles: '',
-            descript: '',
-            classify: '',
+            src: "",
+            tag: "",
+            title: "",
+            articles: "",
+            descript: "",
+            classify: "",
             tags: []
-        }
+        };
     },
     mounted() {
         this.getTags();
     },
     methods: {
         upload(e) {
-            console.log(e)
+            console.log(e);
             this.src = e.url;
         },
         // 获取标签分类
@@ -80,27 +80,26 @@ export default {
             blogTags({}).then(res => {
                 if (res.success && res.data) {
                     this.tags = res.data;
-                    return
+                    return;
                 }
-            })
+            });
         },
         // 博客内容更新
         updata(e) {
             e = e.replace(/'/g, '"');
             this.articles = e;
-            console.log(e)
+            console.log(e);
         },
         // 下拉选择框
         selectChange(e) {
-            console.log(e)
+            console.log(e);
         },
         // 文章发布
         submit() {
             this.tag = this.tag.toString();
-            console.log(this.tag)
             addblog({
                 state: 1,
-                author: '魏超',
+                author: "魏超",
                 tags: this.tag,
                 updateTime: '',
                 title: this.title,
@@ -108,15 +107,15 @@ export default {
                 content: this.articles,
                 classify: this.classify,
                 descript: this.descript,
-
+                cover: this.src
             }).then(res => {
                 if (res.success) {
-                    console.log(res)
+                    console.log(res);
                 }
-            })
+            });
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -130,10 +129,12 @@ export default {
         align-items: center;
         justify-content: space-between;
     }
-    img{
+
+    img {
         width: 100px;
         height: 100px;
     }
+
     .head {
         width: 100%;
         margin-top: 24px;
@@ -160,6 +161,39 @@ export default {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 6px;
+        }
+    }
+
+    .upload {
+        width: 100%;
+
+        span {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+
+        .upload-demo {
+            width: 100%;
+
+            /deep/.el-upload {
+                width: 100%;
+                height: 260px;
+
+                .el-upload-dragger {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                    .el-icon-upload {
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
 }
