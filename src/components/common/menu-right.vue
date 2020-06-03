@@ -106,4 +106,5 @@ export default {
 .box {
     width: 100%;
 }
+
 </style>

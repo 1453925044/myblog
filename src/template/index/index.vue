@@ -54,8 +54,8 @@ import sidebar from "@/components/common/sidebar";
 import articles from "@/components/common/article";
 import snowBanner from "@/components/common/banner";
 import panelContainer from '@/components/panel/index'
-import menuBar from "@/components/common/menu-right";
 import audioPlay from "@/components/audio-play/audio";
+import menuBar from "@/components/common/menu-right";
 import businessCard from "@/components/common/myCard";
 export default {
     components: {

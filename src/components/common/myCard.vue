@@ -1,9 +1,18 @@
 <template>
 <div class="card">
-    <p class="title">魏超个人名片</p>
+    <p class="title">我的个人名片</p>
     <div class="desc">
-        <p class="text" v-for="(item,index) in introduce" :key="index">
-            <span>{{item.title}}</span>
+        <p class="text">
+            <span>职业：{{introduce.profession}}</span>
+        </p>
+        <p class="text">
+            <span>现居：{{introduce.address}}</span>
+        </p>
+        <p class="text">
+            <span>公司：{{introduce.company}}</span>
+        </p>
+        <p class="text">
+            <span>email：{{introduce.email}}</span>
         </p>
     </div>
     <div class="icon-list">
@@ -18,23 +27,15 @@
 </template>
 
 <script>
+import {
+    getUserInfo
+} from '@/api/user/user.js'
 export default {
     data() {
         return {
-            introduce: [{
-                    title: "职业：程序员，前端开发工程师"
-                },
+            introduce: [ ],
+            icons: [
                 {
-                    title: "现居：四川省成都市高新区"
-                },
-                {
-                    title: "公司：成都传晟信息技术有限公司（在职）"
-                },
-                {
-                    title: "Email：1453925044@qq.com"
-                }
-            ],
-            icons: [{
                     img: "/static/images/zy.png",
                     path: "https://github.com/1453925044",
                     prefix: 0
@@ -57,7 +58,18 @@ export default {
             ]
         };
     },
+    mounted() {
+        this.userInfo();
+    },
     methods: {
+        userInfo() {
+            getUserInfo().then(res => {
+                if (res.success && res.data) {
+                    this.introduce = res.data;
+                    return
+                }
+            })
+        },
         jump(args) {
             window.open(args);
         }

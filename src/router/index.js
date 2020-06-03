@@ -14,11 +14,6 @@ const router = new Router({
       name: 'index',
       component: resolve => require(['@/template/index/index'], resolve)
     },
-    { 
-      path: '/test',
-      name: 'test',
-      component: resolve => require(['@/template/test'], resolve)
-    },
     {
       path: "/about/index",
       name: 'about',

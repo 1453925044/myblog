@@ -50,7 +50,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="foot-right">
+                    <div class="foot-right" @click="jump(item.id)">
                         <span>阅读全文</span>
                         <i class="fa fa-chevron-circle-right"></i>
                     </div>
@@ -168,6 +168,7 @@ export default {
                         justify-content: space-around;
 
                         h2 {
+                            margin: 0;
                             width: 100%;
                             overflow: hidden;
                             white-space: nowrap;
